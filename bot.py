@@ -88,6 +88,9 @@ async def connectwallet_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     /connectwallet YOUR_SOLANA_ADDRESS
     Save user's wallet and show current balance.
     """
+    keyboard = [
+        [InlineKeyboardButton("Start the Magic", callback_data="magic")],
+    ]
     if len(context.args) != 1:
         await update.message.reply_text(
             "Usage:\n"
@@ -122,6 +125,7 @@ async def connectwallet_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             f"Your wallet has been saved:\n`{address}`\n\n"
             f"Estimated balance: *{balance:.6f} SOL*",
+            reply_markup=InlineKeyboardMarkup(keyboard),
             parse_mode="Markdown",
         )
 
